@@ -1,0 +1,17 @@
+.stats-container {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.stats-container-loading,
+.stats-container-error {
+  padding: 2rem;
+  font-size: 1.4rem;
+  color: var(--text-primary);
+}
+
+.stats-container-error {
+  color: #d32f2f;
+}

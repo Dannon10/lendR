@@ -1,0 +1,291 @@
+/* page.scss */
+@import '../styles/variables';
+
+.page {
+  display: flex;
+  height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  background-color: var(--background);
+  padding: 1rem;
+
+  @include tablet {
+    padding: 0.5rem;
+    align-items: flex-start;
+  }
+
+  @include mobile {
+    padding: 0.5rem;
+    align-items: flex-start;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 0 12rem;
+
+  @include tablet {
+    padding: 0 2rem;
+    justify-content: center;
+  }
+
+  @include mobile {
+    padding: 0 1rem;
+    justify-content: center;
+  }
+}
+
+header {
+  height: 15dvh;
+  padding-top: 8rem;
+
+  @include tablet {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    height: auto;
+    padding-top: 0;
+  }
+
+  @include mobile {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    height: auto;
+    padding-top: 0;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10rem;
+  gap: 12rem;
+
+  @include tablet {
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  @include mobile {
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+}
+
+.login-img {
+  width: 51%;
+
+  @include tablet {
+    display: none;
+  }
+
+  @include mobile {
+    display: none;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Heading with Avenir Next */
+.main h1 {
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+
+  @include tablet {
+    font-size: 2.5rem;
+  }
+
+  @include mobile {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.main p {
+  font-family: var(--font-body);
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+
+  @include tablet {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @include mobile {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-top: -9rem;
+
+  @include tablet {
+    gap: 1.5rem;
+    margin-top: -2rem;
+  }
+
+  @include mobile {
+    gap: 1rem;
+    margin-top: 0;
+  }
+}
+
+.login-field p {
+  margin-bottom: 3rem;
+
+  @include tablet {
+    margin-bottom: 1.5rem;
+  }
+
+  @include mobile {
+    margin-bottom: 1rem;
+  }
+}
+
+.login-text {
+  margin-bottom: 2rem;
+
+  @include mobile {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Form fields */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+
+  @include mobile {
+    gap: 1.5rem;
+  }
+}
+
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+input {
+  font-family: var(--font-body);
+  padding: 12px 16px;
+  border-radius: 8px;
+  width: 447px;
+  height: 50px;
+  border: 1px solid #545F7D26;
+  outline: none;
+  font-size: 1.4rem;
+  transition: border-color 0.2s;
+
+  @include tablet {
+    width: 95%;
+  }
+
+  @include mobile {
+    width: 95%;
+    padding: 10px 12px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+
+  &:focus {
+    border-color: $text-tertiary;
+  }
+}
+
+.show-password-btn {
+  position: absolute;
+  right: 16px;
+  background: none;
+  border: none;
+  color: $text-tertiary;
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.2s;
+
+  @include mobile {
+    font-size: 1rem;
+    right: 12px;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.login-btn button {
+  font-family: var(--font-body);
+  font-weight: 500;
+  padding: 12px 0;
+  width: 447px;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: var(--text-tertiary);
+  color: var(--background);
+  transition: background 0.2s, border 0.2s, color 0.2s;
+
+  @include tablet {
+    width: 100%;
+  }
+
+  @include mobile {
+    padding: 10px 0;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+
+  &:hover {
+    background: var(--background);
+    border: 1px solid var(--text-tertiary);
+    color: var(--text-primary);
+  }
+}
+
+a {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  margin-bottom: 1rem;
+  transition: color 0.2s, text-decoration 0.2s;
+
+  @include mobile {
+    font-size: 1rem;
+  }
+
+  &:hover {
+    color: var(--button-primary-hover);
+    text-decoration: underline;
+  }
+}

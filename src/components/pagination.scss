@@ -1,0 +1,68 @@
+@import '../styles/variables';
+
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding: 1.5rem 0;
+}
+
+.pagination-info {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  color: var(--text-primary);
+}
+
+.pagination-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.pagination-btn {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #e5e5e5;
+  background-color: #ffffff;
+  color: var(--text-primary);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  min-width: 36px;
+  text-align: center;
+
+  &:hover:not(:disabled) {
+    border-color: $text-tertiary;
+    color: $text-tertiary;
+    background-color: rgba(57, 205, 204, 0.05);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &.active {
+    background-color: $text-tertiary;
+    color: #ffffff;
+    border-color: $text-tertiary;
+  }
+
+  &.dots {
+    cursor: default;
+    border: none;
+    
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  &.prev-btn,
+  &.next-btn {
+    font-weight: 600;
+    font-size: 1.4rem;
+  }
+}

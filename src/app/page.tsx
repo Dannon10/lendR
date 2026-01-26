@@ -1,65 +1,72 @@
+"use client";
+
 import Image from "next/image";
-import styles from "./page.module.css";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import "./page.scss";
 
 export default function Home() {
+  const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    router.push("/dashboard");
+  };
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="page">
+      <main className="main">
+        {/* <div className="login-img"> */}
+        <header>
+          <Image src="/lendsqr-logo.svg" alt="Logo" width={146} height={32} />
+        </header>
+
+<div className="login-container">
+        <div className="login-img">
+          <Image src="/login-img1.png" alt="Illustration" width={600} height={337} />
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        {/* </div> */}
+
+        <div className="login-field">
+          <div className="login-text">
+          <h1>Welcome!</h1>
+          <p>Enter details to login.</p>
+          </div>
+
+          <form>
+            <div>
+              <input type="email" placeholder="Email" />
+            </div>
+
+            <div className="password-input-wrapper">
+              <input 
+                type={showPassword ? "text" : "password"} 
+                placeholder="Password" 
+              />
+              <button
+                type="button"
+                className="show-password-btn"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? "HIDE" : "SHOW"}
+              </button>
+            </div>
+
+            <div>
+              <a href="#">FORGOT PASSWORD?</a>
+            </div>
+
+            <div className="login-btn">
+              <button type="submit" onClick={handleLogin}>LOG IN</button>
+            </div>
+          </form>
         </div>
+</div>
       </main>
     </div>
   );

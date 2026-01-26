@@ -1,0 +1,45 @@
+// Light mode colors
+$background-light: #ffffff;
+$foreground-light: #ffffff;
+
+// Dark mode colors
+
+// Text colors
+$text-primary: #545F7D;
+$text-secondary: #213F7D;
+$text-tertiary: #39CDCC;
+
+// Font variables
+$font-base: system-ui, -apple-system, sans-serif;
+
+// Breakpoints
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 1024px;
+$large-desktop: 1440px;
+
+// Media query mixins
+@mixin mobile {
+  @media (max-width: $mobile) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: $tablet) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $desktop) {
+    @content;
+  }
+}
+
+@mixin large-desktop {
+  @media (min-width: $large-desktop) {
+    @content;
+  }
+}
+
