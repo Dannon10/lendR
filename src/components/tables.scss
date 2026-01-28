@@ -1,3 +1,5 @@
+@import '../styles/variables.scss';
+
 .table-wrapper {
   width: 100%;
   overflow-x: auto;
@@ -29,23 +31,22 @@
   th .th-content {
     display: flex;
     align-items: center;
-    // justify-content: space-between;
     gap: 8px;
   }
 
   .filter-icon {
     flex-shrink: 0;
-    color: #545f7d;
+    color: $text-primary;
     cursor: pointer;
     transition: color 0.2s ease;
 
     &:hover {
-      color: #213f7d;
+      color: $text-secondary;
     }
   }
 
   td {
-    color: #213f7d;
+    color: $text-secondary;
     border-bottom: 1px solid #f0f2f5;
   }
 
@@ -88,4 +89,77 @@
   cursor: pointer;
   text-align: center;
   color: #545f7d;
+  position: relative;
+}
+
+.action-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.action-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #545f7d;
+  padding: 4px 8px;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $text-tertiary;
+  }
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  min-width: 180px;
+  z-index: 10;
+  margin-top: 8px;
+  overflow: hidden;
+
+  .dropdown-content {
+    padding: 1rem;
+  }
+
+
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    background: none;
+    color: $text-primary;
+    font-size: 1.4rem;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+
+    img {
+      flex-shrink: 0;
+    }
+
+    &:hover {
+      background: #f5f5f5;
+      color: $text-tertiary;
+    }
+
+    &:first-child {
+      border-top: none;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
 }

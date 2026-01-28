@@ -1,0 +1,190 @@
+@import '@/styles/variables';
+
+.user-details-container {
+  padding: 2rem;
+  font-family: $font-base;
+  color: $text-primary;
+
+  @include mobile {
+    padding: 1rem;
+  }
+}
+
+/* Back button */
+.back-btn {
+  background: none;
+  border: none;
+  color: $text-secondary;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+}
+
+/* Header */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  h1 {
+    color: $text-secondary;
+  }
+
+  .actions {
+    display: flex;
+    gap: 1rem;
+  }
+
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+.btn-outline {
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  background: transparent;
+  cursor: pointer;
+
+  &.danger {
+    border: 1px solid #e4033b;
+    color: #e4033b;
+  }
+
+  &.success {
+    border: 1px solid $text-tertiary;
+    color: $text-tertiary;
+  }
+}
+
+/* Summary card */
+.user-summary {
+  background: $background-light;
+  border-radius: 8px;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  margin-bottom: 2rem;
+
+  @include tablet {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(33, 63, 125, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: $text-secondary;
+  }
+
+  h2 {
+    margin: 0;
+    color: $text-secondary;
+  }
+
+  .id {
+    font-size: 0.85rem;
+    color: $text-primary;
+  }
+}
+
+.tier {
+  text-align: center;
+
+  p {
+    font-size: 0.85rem;
+  }
+}
+
+.balance {
+  h3 {
+    margin: 0;
+    color: $text-secondary;
+  }
+
+  p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 2rem;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+
+  span {
+    padding-bottom: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .active {
+    color: $text-tertiary;
+    border-bottom: 2px solid $text-tertiary;
+  }
+}
+
+/* Details card */
+.details-card {
+  background: $background-light;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+
+  section {
+    margin-bottom: 2rem;
+
+    h4 {
+      color: $text-secondary;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+
+    label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: $text-primary;
+    }
+
+    p {
+      font-weight: 500;
+      color: $text-secondary;
+    }
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+}

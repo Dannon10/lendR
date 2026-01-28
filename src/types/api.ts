@@ -50,7 +50,14 @@ export interface User {
   avatar?: string
   accountBalance?: number
   bankInfo?: BankInfo
-  personalInfo?: PersonalInfo
+   profile?: {
+    fullName: string
+    bvn?: string
+    gender?: string
+    maritalStatus?: string
+    children?: number
+    typeOfResidence?: string
+  }
   education?: Education
   socials?: Socials
   guarantors?: Guarantor[]

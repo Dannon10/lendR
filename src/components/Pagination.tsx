@@ -1,5 +1,5 @@
 'use client'
-
+import Image from 'next/image'
 import './pagination.scss'
 
 interface PaginationProps {
@@ -64,7 +64,11 @@ export default function Pagination({
   return (
     <div className='pagination-container'>
       <div className='pagination-info'>
-        Showing {startItem} of {totalItems}
+        Showing <span className='show'>
+          {startItem}
+          <Image src='/chevron down.svg' alt='dash' width={14} height={14} />
+          </span>
+           of {totalItems}
       </div>
 
       <div className='pagination-buttons'>
@@ -73,7 +77,7 @@ export default function Pagination({
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
         >
-          &lt;
+          <Image src='/prev btn.svg' alt='Previous' width={24} height={24} />
         </button>
 
         {generatePageNumbers().map((page, index) => (
@@ -94,7 +98,7 @@ export default function Pagination({
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
         >
-          &gt;
+          <Image src='/next btn.svg' alt='Previous' width={24} height={24} />
         </button>
       </div>
     </div>

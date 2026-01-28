@@ -4,14 +4,28 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 2rem;
-  padding: 1.5rem 0;
+  // margin-top: 2rem;
+  // padding: 1.5rem 0;
 }
 
 .pagination-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
   font-family: var(--font-body);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: var(--text-primary);
+}
+
+.show{
+  background-color: rgba($text-secondary, 0.1);
+  padding: .5rem 1.5rem;
+  border-radius: .6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .pagination-buttons {
@@ -22,33 +36,27 @@
 
 .pagination-btn {
   font-family: var(--font-body);
-  font-size: 1.2rem;
   font-weight: 500;
   padding: 0.6rem 0.8rem;
-  border: 1px solid #e5e5e5;
-  background-color: #ffffff;
+  border: none;
   color: var(--text-primary);
+  opacity: .5;
   cursor: pointer;
-  border-radius: 4px;
   transition: all 0.2s ease;
-  min-width: 36px;
   text-align: center;
+  background-color: transparent;
 
   &:hover:not(:disabled) {
-    border-color: $text-tertiary;
     color: $text-tertiary;
-    background-color: rgba(57, 205, 204, 0.05);
   }
 
   &:disabled {
-    opacity: 0.5;
     cursor: not-allowed;
   }
 
   &.active {
-    background-color: $text-tertiary;
-    color: #ffffff;
-    border-color: $text-tertiary;
+    color: $text-primary;
+    opacity: 1;
   }
 
   &.dots {
@@ -64,5 +72,6 @@
   &.next-btn {
     font-weight: 600;
     font-size: 1.4rem;
+    opacity: 1;
   }
 }
