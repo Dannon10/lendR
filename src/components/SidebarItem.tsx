@@ -8,7 +8,12 @@ interface SidebarItemProps extends SidebarItemType {}
 
 export default function SidebarItem({ icon, label, href }: SidebarItemProps) {
   const pathname = usePathname()
-  const isActive = pathname === href
+  let isActive = false
+  if (href === '/') {
+    isActive = pathname === '/'
+  } else if (pathname) {
+    isActive = pathname === href || pathname.startsWith(href)
+  }
 
   return (
     <Link href={href}>

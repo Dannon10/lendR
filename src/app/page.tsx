@@ -21,7 +21,6 @@ export default function Home() {
   return (
     <div className="page">
       <main className="main">
-        {/* <div className="login-img"> */}
         <header>
           <Image src="/lendsqr-logo.svg" alt="Logo" width={146} height={32} />
         </header>
@@ -30,7 +29,6 @@ export default function Home() {
         <div className="login-img">
           <Image src="/login-img1.png" alt="Illustration" width={600} height={337} />
         </div>
-        {/* </div> */}
 
         <div className="login-field">
           <div className="login-text">

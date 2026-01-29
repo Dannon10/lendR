@@ -374,6 +374,33 @@ class UserService {
         return this.allUsersCached.find(u => String(u.id) === String(id))
     }
 
+    /**
+     * Update a user's status in the local cache and persist to localStorage.
+     * Returns the updated user or undefined if not found.
+     */
+    updateUserStatus(id: string, status: User['status']): User | undefined {
+        if (!this.allUsersCached) return undefined
+        const idx = this.allUsersCached.findIndex(u => String(u.id) === String(id))
+        if (idx === -1) return undefined
+
+        const updated = { ...this.allUsersCached[idx], status }
+        this.allUsersCached[idx] = updated
+
+        // persist updated cache
+        try {
+            if (typeof window !== 'undefined') {
+                localStorage.setItem(
+                    this.CACHE_KEY,
+                    JSON.stringify({ data: this.allUsersCached, timestamp: this.cacheTimestamp })
+                )
+            }
+        } catch (e) {
+            console.error('Failed to persist users cache after status update', e)
+        }
+
+        return updated
+    }
+
     // Method to clear cache if needed
     clearCache(): void {
         this.allUsersCached = null

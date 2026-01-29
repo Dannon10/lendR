@@ -1,7 +1,7 @@
 @import '../styles/variables';
 
 .sidebar {
-  width: 280px;
+  max-width: 283px;
   height: 100%;
   background-color: var(--background);
   border-right: 1px solid #e5e5e5;
@@ -9,11 +9,189 @@
   overflow-x: hidden;
 
   @include tablet {
-    width: 240px;
+    display: none;
   }
 
   @include mobile {
     display: none;
+  }
+}
+
+/* Mobile open state: show sidebar as drawer */
+body.sidebar-open {
+  .sidebar {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 80%;
+    max-width: 340px;
+    z-index: 60;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+    transform: translateX(0);
+    overflow-y: auto;
+  }
+}
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 55;
+  cursor: pointer;
+}
+
+body.sidebar-open .sidebar-overlay {
+  @include tablet {
+    display: block;
+  }
+
+  @include mobile {
+    display: block;
+  }
+}
+
+.sidebar-close {
+  display: none;
+  position: absolute;
+  right: 16px;
+  top: 2px;
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  z-index: 100;
+
+  img {
+    width: 24px;
+    height: 24px;
+  }
+
+  @include tablet {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8rem;
+    justify-content: center;
+  }
+
+  @include mobile {
+    display: flex;
+    margin-bottom: 8rem;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.mobile-search {
+  display: none;
+  padding: 1.2rem 1.2rem 1rem 1.2rem;
+  position: relative;
+  margin-top: 3rem;
+
+  .search-input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #e5e9f2;
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+  }
+
+  .search-icon-wrapper {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: $text-tertiary;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+  }
+
+  .search-results {
+    position: absolute;
+    top: 100%;
+    left: 1.2rem;
+    right: 1.2rem;
+    background: var(--background);
+    border: 1px solid #E5E9F2;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(84,95,125,0.08);
+    z-index: 50;
+    max-height: 320px;
+    overflow: auto;
+    margin-top: 0.5rem;
+  }
+
+  .search-result-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-family: var(--font-body);
+    font-size: 1.4rem;
+
+    &:hover {
+      background: #F6F7FB;
+    }
+
+    .result-left {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .result-name {
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-size: 1.4rem;
+    }
+
+    .result-meta {
+      font-size: 0.85rem;
+      color: var(--text-primary);
+    }
+
+    .result-right {
+      color: $text-tertiary;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+  }
+
+  @include tablet{
+    display: block;
+  }
+
+  @include mobile {
+    display: block;
+  }
+}
+
+/* items that should be shown in sidebar on mobile to declutter navbar */
+.sidebar-mobile-extra {
+  display: none;
+
+  @include tablet {
+    display: block;
+    padding: 1rem 1.2rem;
+  }
+
+  @include mobile {
+    display: block;
+    padding: 1rem 1.2rem;
   }
 }
 
@@ -36,6 +214,14 @@
   color: var(--text-primary);
   cursor: pointer;
   transition: background-color 0.2s;
+
+  @include tablet {
+    margin-top: 2rem;
+  }
+
+  @include mobile {
+    margin-top: 2rem;
+  }
 
   &:hover {
     background-color: rgba(57, 205, 204, 0.1);

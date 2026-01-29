@@ -11,7 +11,7 @@
   flex: 1;
   display: flex;
   flex-direction: row;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .dashboard-sidebar {
@@ -34,7 +34,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-x: hidden;
 
   main {
     flex: 1;
@@ -54,4 +54,31 @@
 
 .dashboard-main{
     background-color: #FBFBFB;
+}
+
+/* Replicate users styles with dashboard prefix */
+.dashboard-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.stats-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.dashboard-main {
+    gap: 4rem;
+    padding: 3rem 6rem 2rem 6rem;
+
+    @include tablet {
+      padding: 2rem 1rem;
+    }
+
+    @include mobile {
+      padding: 1rem;
+    }
 }

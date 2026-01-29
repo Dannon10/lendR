@@ -3,10 +3,52 @@
 .table-wrapper {
   width: 100%;
   overflow-x: auto;
+  overflow-y: visible;
   background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06),
               0 2px 4px rgba(0, 0, 0, 0.04);
+  position: relative;
+}
+
+@include tablet {
+  .table-wrapper {
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      height: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(84,95,125,0.25);
+      border-radius: 6px;
+      border: 2px solid transparent;
+      background-clip: padding-box;
+    }
+
+    scrollbar-color: rgba(84,95,125,0.25) transparent;
+  }
+}
+
+@include mobile {
+  .table-wrapper {
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      height: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(84,95,125,0.3);
+      border-radius: 6px;
+    }
+
+    scrollbar-color: rgba(84,95,125,0.3) transparent;
+  }
 }
 
 .users-table {
@@ -24,8 +66,8 @@
   }
 
   th {
-    font-weight: 600;
-    color: #545f7d;
+    font-weight: 500;
+    color: $text-primary;
   }
 
   th .th-content {
@@ -38,7 +80,6 @@
     flex-shrink: 0;
     color: $text-primary;
     cursor: pointer;
-    transition: color 0.2s ease;
 
     &:hover {
       color: $text-secondary;
@@ -48,6 +89,10 @@
   td {
     color: $text-secondary;
     border-bottom: 1px solid #f0f2f5;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
   }
 
   tr:hover {
@@ -122,7 +167,7 @@
   min-width: 180px;
   z-index: 10;
   margin-top: 8px;
-  overflow: hidden;
+  // overflow: hidden;
 
   .dropdown-content {
     padding: 1rem;

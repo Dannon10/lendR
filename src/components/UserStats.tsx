@@ -1,45 +1,58 @@
 'use client'
 
-import { useGetUsers } from '@/hooks/useUsers'
+import { useGetAllUsers } from '@/hooks/useUsers'
 import UserStatCard from './UserStatCard'
 import './userStats.scss'
+import CardSkeleton from './CardSkeleton'
 
 export default function UserStats() {
-  const { data: usersData, isLoading, error } = useGetUsers()
+  const { data: allUsers, isLoading, error } = useGetAllUsers()
 
   if (isLoading) {
-    return <div className='stats-container-loading'>Loading stats...</div>
+    return <div className='stats-container'>
+      {isLoading && Array.from({ length: 4 }, (_, i) => <CardSkeleton key={i} />)} 
+    </div>
   }
 
   if (error) {
-    return <div className='stats-container-error'>Error loading stats</div>
+    return (
+      <>
+        <div className='stats-container-error'>Error loading stats Kindly Refresh the page</div>
+        <div className="error-icon">⚠</div>
+      </>
+    )
   }
 
-  // Generate stats from the fetched data
+  // Calculate stats from actual data
+  const totalUsers = allUsers?.length || 0
+  const activeUsers = allUsers?.filter((u) => u.status?.toLowerCase() === 'active').length || 0
+  const usersWithLoans = allUsers?.filter((u) => u.education?.loanRepayment && u.education.loanRepayment > 0).length || 0
+  const usersWithSavings = allUsers?.filter((u) => u.accountBalance && u.accountBalance > 0).length || 0
+
   const stats = [
     {
       id: 'total-users',
       label: 'Users',
-      value: usersData?.data?.length || 0,
-      icon: '/users.svg',
+      value: totalUsers,
+      icon: '/user-icon.svg',
     },
     {
       id: 'active-users',
       label: 'Active Users',
-      value: usersData?.data?.filter((u) => u.status === 'active').length || 0,
-      icon: '/active-users.svg',
+      value: activeUsers,
+      icon: '/active-user-icon.svg',
     },
     {
       id: 'users-with-loans',
       label: 'Users With Loans',
-      value: usersData?.data?.length || 0, // Replace with actual logic
-      icon: '/loans.svg',
+      value: usersWithLoans,
+      icon: '/user-loan-icon.svg',
     },
     {
       id: 'users-with-savings',
       label: 'Users With Savings',
-      value: usersData?.data?.length || 0, // Replace with actual logic
-      icon: '/savings-product.svg',
+      value: usersWithSavings,
+      icon: '/user-savings-icon.svg',
     },
   ]
 

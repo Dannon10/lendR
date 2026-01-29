@@ -1,0 +1,235 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.user-details-skeleton {
+  padding: 20px;
+  animation: shimmer 2s infinite;
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 1000px 100%;
+
+  .skeleton-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+
+    .skeleton-button-small {
+      width: 120px;
+      height: 36px;
+      border-radius: 4px;
+      background-color: #e0e0e0;
+    }
+
+    .skeleton-button-group {
+      display: flex;
+      gap: 16px;
+
+      .skeleton-button {
+        width: 140px;
+        height: 36px;
+        border-radius: 4px;
+        background-color: #e0e0e0;
+      }
+    }
+  }
+
+  .skeleton-profile-card {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+    .skeleton-profile-header {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+
+      .skeleton-avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: #e0e0e0;
+        flex-shrink: 0;
+      }
+
+      .skeleton-identity {
+        flex: 1;
+        min-width: 150px;
+
+        .skeleton-text-lg {
+          width: 200px;
+          height: 24px;
+          margin-bottom: 8px;
+        }
+
+        .skeleton-text-sm {
+          width: 150px;
+          height: 16px;
+        }
+      }
+
+      .skeleton-divider {
+        width: 1px;
+        height: 60px;
+        background-color: #e0e0e0;
+      }
+
+      .skeleton-tier {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .skeleton-text-sm {
+          width: 100px;
+          height: 16px;
+        }
+
+        .skeleton-stars {
+          display: flex;
+          gap: 8px;
+
+          .skeleton-star {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            background-color: #e0e0e0;
+          }
+        }
+      }
+
+      .skeleton-bank {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .skeleton-text-md {
+          width: 150px;
+          height: 20px;
+        }
+
+        .skeleton-text-sm {
+          width: 200px;
+          height: 16px;
+        }
+      }
+    }
+
+    .skeleton-tabs {
+      display: flex;
+      gap: 16px;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 16px;
+
+      .skeleton-tab {
+        width: 120px;
+        height: 36px;
+        border-radius: 4px;
+        background-color: #e0e0e0;
+      }
+    }
+  }
+
+  .skeleton-details-head {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+
+    .skeleton-details-section {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+      .skeleton-text-md {
+        width: 180px;
+        height: 20px;
+        margin-bottom: 16px;
+      }
+
+      .skeleton-details-content {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        .skeleton-detail-item {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+
+          .skeleton-text-sm {
+            &:first-child {
+              width: 120px;
+              height: 14px;
+            }
+
+            &:last-child {
+              width: 100%;
+              max-width: 200px;
+              height: 16px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .skeleton-text {
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    display: inline-block;
+  }
+}
+
+@media (max-width: 768px) {
+  .user-details-skeleton {
+    padding: 16px;
+
+    .skeleton-profile-card {
+      padding: 16px;
+
+      .skeleton-profile-header {
+        gap: 16px;
+        margin-bottom: 16px;
+
+        .skeleton-avatar {
+          width: 80px;
+          height: 80px;
+        }
+
+        .skeleton-divider {
+          display: none;
+        }
+      }
+
+      .skeleton-tabs {
+        overflow-x: auto;
+        gap: 12px;
+
+        .skeleton-tab {
+          min-width: 100px;
+        }
+      }
+    }
+
+    .skeleton-details-head {
+      grid-template-columns: 1fr;
+    }
+  }
+}

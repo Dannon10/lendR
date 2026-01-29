@@ -2,10 +2,11 @@
 
 import "./tables.scss";
 import { User } from "@/types/api";
-import FilterIcon from "./FilterIcon";
+import FilterDropdown from "./FilterDropdown";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { userService } from '@/services/userService'
 
 interface UsersTableProps {
   users: User[];
@@ -13,8 +14,14 @@ interface UsersTableProps {
 
 const UsersTable = ({ users }: UsersTableProps) => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [filteredUsers, setFilteredUsers] = useState<User[]>(users);
   const menuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+
+  // Update filteredUsers when the users prop changes
+  useEffect(() => {
+    setFilteredUsers(users);
+  }, [users]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -38,14 +45,25 @@ const UsersTable = ({ users }: UsersTableProps) => {
 
   const handleAction = (action: string, userId: string) => {
     setOpenDropdown(null);
-      if (action === "View Details") {
-        console.log("Navigating to:", `/users/${userId}`);
-        console.log('button clicked')
-          localStorage.setItem('selectedUser', JSON.stringify(users))
-    router.push(`/users/${userId}`);
-    return;
+    if (action === "View Details") {
+      const selected = users.find(u => u.id === userId)
+      if (selected && typeof window !== 'undefined') {
+        localStorage.setItem('selectedUser', JSON.stringify(selected))
+      }
+      router.push(`/users/${userId}`)
+      return
+    }
+
+    if (action === "Activate User" || action === 'Blacklist User') {
+      const newStatus = action === 'Activate User' ? 'Active' : 'Blacklisted'
+      const updated = userService.updateUserStatus(userId, newStatus)
+      if (updated) {
+        setFilteredUsers(prev => prev.map(u => u.id === userId ? { ...u, status: newStatus } : u))
+      }
+      return
+    }
+
   }
-  };
 
   const formatDate = (dateString: string): string => {
     const date = new Date(dateString)
@@ -75,45 +93,95 @@ const UsersTable = ({ users }: UsersTableProps) => {
     return text
   }
 
+  const handleFilter = (filters: any) => {
+    let result = [...users]
+
+    if (filters.organization && filters.organization.trim()) {
+      result = result.filter(u => 
+        u.organization?.toLowerCase().includes(filters.organization.toLowerCase())
+      )
+    }
+
+    if (filters.username && filters.username.trim()) {
+      result = result.filter(u => 
+        (u.profile?.fullName|| '')
+          .toLowerCase()
+          .includes(filters.username.toLowerCase())
+      )
+    }
+
+    if (filters.email && filters.email.trim()) {
+      result = result.filter(u => 
+        u.email?.toLowerCase().includes(filters.email.toLowerCase())
+      )
+    }
+
+    if (filters.phoneNumber && filters.phoneNumber.trim()) {
+      result = result.filter(u => 
+        String(u.phoneNumber || '').includes(filters.phoneNumber)
+      )
+    }
+
+    if (filters.dateJoined && filters.dateJoined.trim()) {
+      result = result.filter(u => {
+        const userDate = new Date(u.dateJoined).toISOString().split('T')[0]
+        return userDate === filters.dateJoined
+      })
+    }
+
+    if (filters.status && filters.status.trim()) {
+      result = result.filter(u => 
+        u.status?.toLowerCase() === filters.status.toLowerCase()
+      )
+    }
+
+    setFilteredUsers(result)
+  }
+
+  const handleReset = () => {
+    setFilteredUsers(users)
+  }
+
   return (
     <div className="table-wrapper">
       <table className="users-table">
         <thead>
-          <tr>
+            <tr>
             <th>
               <span className="th-content">
                 Organization
-                <FilterIcon />
+               <Image src="/filter.svg" alt="Filter" width={16} height={16} />
+
               </span>
             </th>
             <th>
               <span className="th-content">
                 Username
-                <FilterIcon />
+                <FilterDropdown onFilter={handleFilter} onReset={handleReset} />
               </span>
             </th>
             <th>
               <span className="th-content">
                 Email
-                <FilterIcon />
+                <FilterDropdown onFilter={handleFilter} onReset={handleReset} />
               </span>
             </th>
             <th>
               <span className="th-content">
                 Phone Number
-                <FilterIcon />
+                <FilterDropdown onFilter={handleFilter} onReset={handleReset} />
               </span>
             </th>
             <th>
               <span className="th-content">
                 Date Joined
-                <FilterIcon />
+                <FilterDropdown onFilter={handleFilter} onReset={handleReset} />
               </span>
             </th>
             <th>
               <span className="th-content">
                 Status
-                <FilterIcon />
+                <Image src="/filter.svg" alt="Filter" width={16} height={16} />
               </span>
             </th>
             <th></th>
@@ -121,13 +189,24 @@ const UsersTable = ({ users }: UsersTableProps) => {
         </thead>
 
         <tbody>
-          {users && users.length > 0 ? (
-            users.map((user) => (
-              <tr key={user.id}>
+          {filteredUsers && filteredUsers.length > 0 ? (
+            filteredUsers.map((user) => (
+              <tr
+                key={user.id}
+                onClick={() => router.push(`/users/${user.id}`)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    router.push(`/users/${user.id}`)
+                  }
+                }}
+                tabIndex={0}
+                style={{ cursor: 'pointer' }}
+              >
                 <td>{truncateText(user.organization, 17)}</td>
                 <td>{user.profile?.fullName || '-'}</td>
                 <td>{user.email || '-'}</td>
-                <td>{formatPhoneNumber(user.phoneNumber || user.phoneNumber)}</td>
+                <td>0{formatPhoneNumber(user.phoneNumber || user.phoneNumber)}</td>
                 <td>{user.dateJoined ? formatDate(user.dateJoined) : '-'}</td>
                 <td>
                   <span
@@ -140,7 +219,9 @@ const UsersTable = ({ users }: UsersTableProps) => {
                   <div className="action-menu" ref={menuRef}>
                     <button
                       className="action-button"
-                      onClick={() => handleDropdownToggle(user.id)}
+                      onClick={(e) => { e.stopPropagation(); handleDropdownToggle(user.id); }}
+                      aria-haspopup="true"
+                      aria-expanded={openDropdown === user.id}
                     >
                       ⋮
                     </button>

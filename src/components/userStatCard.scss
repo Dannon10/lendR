@@ -1,4 +1,6 @@
 @import "../styles/variables";
+@import '../styles/mixins.scss';
+
 
 .stat-card {
   width: 100%;
@@ -7,14 +9,14 @@
   background-color: #ffffff;
   border: 1px solid #e5e5e5;
   border-radius: 8px;
+  max-width: 240px;
   padding: 1.5rem;
   display: flex;
   justify-content: space-between;
-  transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 
-  &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  @include mobile{
+    max-width: 100%;
   }
 }
 
@@ -34,22 +36,19 @@
 }
 
 .stat-icon {
-//   width: 24px;
-//   height: 24px;
   flex-shrink: 0;
 }
 
 .stat-label {
   margin: 0;
-  font-family: var(--font-body);
   font-size: 1.4rem;
+  letter-spacing: 0;
   font-weight: 500;
   color: $text-primary;
   line-height: 1.4;
 }
 
 .stat-value {
-  font-family: var(--font-body);
   font-size: 2.4rem;
   font-weight: 700;
   color: var(--text-secondary);

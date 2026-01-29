@@ -21,7 +21,7 @@ export interface Education {
   duration?: string
   officeEmail?: string
   monthlyIncome?: string
-  loanRepayment?: string
+  loanRepayment?: number
 }
 
 export interface Socials {
@@ -49,6 +49,7 @@ export interface User {
   status: 'Active' | 'Inactive' | 'Pending' | 'Blacklisted' | 'active' | 'inactive' | 'pending'
   avatar?: string
   accountBalance?: number
+  tier?: number
   bankInfo?: BankInfo
    profile?: {
     fullName: string
