@@ -4,7 +4,7 @@ A small Next.js + TypeScript frontend used for a frontend engineering assessment
 
 ## Key Features
 
-- Responsive layout with a Dashboard, Users list and User Details pages.
+- Responsive layout with a Login, Dashboard, Users list and User Details pages.
 - User details page with tabbed sections and an overflow `More` menu for smaller viewports.
 - Clickable and keyboard-accessible user table rows that navigate to user details.
 - SCSS-based design system with variables and mixins.
