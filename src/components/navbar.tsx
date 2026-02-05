@@ -80,7 +80,7 @@ export default function navbar() {
                     <button className='hamburger-btn' aria-label='Open menu' onClick={toggleSidebar}>
                         <Image src='/menu-line 1.svg' alt='Menu' width={20} height={20} />
                     </button>
-                    <Image src="/lendsqr-logo.svg" alt="Logo" width={146} height={32} />
+                    <Image src="/lendr.png" alt="Logo" width={100} height={70} />
                     <div className='search-wrapper' ref={ref}>
                         <input
                             value={query}

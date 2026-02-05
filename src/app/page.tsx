@@ -22,7 +22,8 @@ export default function Home() {
     <div className="page">
       <main className="main">
         <header>
-          <Image src="/lendsqr-logo.svg" alt="Logo" width={146} height={32} />
+          {/* <Image src="/lr-logo.webp" alt="Logo" width={50} height={32} /> */}
+          <Image src="/lendr.png" alt="Logo" width={100} height={32} />
         </header>
 
 <div className="login-container">
