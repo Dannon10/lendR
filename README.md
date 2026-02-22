@@ -1,6 +1,6 @@
-# Lendsqr Frontend Engineering Test
+# LendR
 
-A small Next.js + TypeScript frontend used for a frontend engineering assessment. It demonstrates responsive layouts, SCSS-based styling, data fetching, caching, accessibility improvements, and unit testing with Jest and React Testing Library.
+A small Next.js + TypeScript. It demonstrates responsive layouts, SCSS-based styling, data fetching, caching, accessibility improvements, and unit testing with Jest and React Testing Library.
 
 ## Key Features
 
